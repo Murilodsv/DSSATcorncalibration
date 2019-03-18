@@ -84,8 +84,7 @@ myfunction <- function(X,Optfig){
     
     SIMtotalDW60[i] <- data$CWAD[data$DAP==60]
     SIMtotalDW75[i] <- data$CWAD[data$DAP==75]
-    SIMGY[i] <- tail(data$GWAD,n=1)
-    
+    SIMGY[i] <- data$GWAD[length(data$GWAD)] # pick last day value
   }
   
   
