@@ -1,0 +1,16 @@
+Par_orig,Par_Rscript,Rep_ID,Par_type,Par_size,File,Calibrate,Calib_range_min,Calib_range_max,initial_values,Calib_SC10,Calib_TW310
+P1,p1,<p1>,Real,5,.CUL,T,100,450,200,199,199.75
+P2,p2,<p2>,Real,5,.CUL,T,0,2,1,0.125,1.1367188
+P5,p5,<p3>,Real,5,.CUL,T,580,1035,780,772.75,766
+G2,g2,<p4>,Real,5,.CUL,T,248,1100,750,761.375,769
+G3,g3,<p5>,Real,4,.CUL,T,4.8,16.5,8.5,14.5,14.5
+PHINT,phint,<p6>,Real,5,.CUL,T,38.9,55,49,54.25,51.875
+TBASE,tbase,<p6>,Real,5,.ECO,T,7.2,8.8,8,8,7.75
+TOPT,topt,<p6>,Real,5,.ECO,T,30.6,37.4,34,30.6,33.725
+ROPT,ropt,<p6>,Real,5,.ECO,T,30.6,37.4,34,34.125,33.6
+P20,p20,<p6>,Real,5,.ECO,T,11.25,13.75,12.5,11.25,11.5
+GJTI,gjti,<p6>,Real,5,.ECO,T,3.6,4.4,4,3.75,4
+GDDE,gdde,<p6>,Real,5,.ECO,T,5.4,6.6,6,5.4,5.75
+DSGFT,dsgft,<p6>,Real,5,.ECO,T,153,187,170,167.625,166.5
+RUE,rue,<p6>,Real,5,.ECO,T,2,5.1,4.2,4.2,4.075
+KCAN,kcan,<p6>,Real,5,.ECO,T,0.1,0.95,0.85,0.85,0.8578125
