@@ -1,3 +1,15 @@
+#--- Installing missing packages
+pkg = c("sirad", # For GIS image usage
+        "Dasst",  # For GIS image usage
+        "hydroGOF",  # For NetCDF files manipulations
+        "optimr", # Track runtime 
+        "dfoptim",# Plot cool charts 
+        "FME",  # Make a beep when finished a process
+        "optimx")  
+ipkg = pkg %in% rownames(installed.packages())
+sapply(pkg[!ipkg],function(x) install.packages(x))
+
+
 library(sirad)
 library(Dasst)
 library(hydroGOF)
