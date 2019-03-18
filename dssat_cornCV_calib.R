@@ -147,15 +147,11 @@ resoptimr=optimx::optimx(par=par_initia,myfunction,Optfig=0,itnmax=100000,
                          lower=par_min,upper=par_max,method=c("Nelder-Mead","hjkb","L-BFGS-B"), 
                          control=list(maxit=100000,all.methods=T,follow.on=T))
 
+#--- Best set of parameters
+par.optmized.SC10 = resoptimr
 
-plot(OBStotalDW,simtotalDW,xlim=c(0,8000),ylim=c(0,8000))
-reg1<- lm(simtotalDW~OBStotalDW)
-abline(reg1,pch=4,col=2,lwd=2, lty=2)
-abline(0:1)
-modeleval_GY <- modeval(simtotalDW,OBStotalDW)
-text(7000,50,label=bquote("R"^2~":" ~ .(round(modeleval_GY$R2[[1]],digits=2))),cex=0.7) 
-text(50,7000,label=noquote(paste0("RMSE: ",round(modeleval_GY$RMSE[[1]],digits=2))),cex=0.7)
-
+#--- Final Results with best-fit
+final.res.SC10 = myfunction(par.optmized.SC10,Optfig=1)
 #-------------------------TC310 cultivar------------------------------
 
 OBStotalDW <- round(Obs_data$Value[Obs_data$Vari=="totaldryweight" & Obs_data$Nit=="190" & Obs_data$DAP %in% c("60","75") & Obs_data$Trt %in% c(21:40)],digits=0)
@@ -268,6 +264,13 @@ myfunction <- function(X,Optfig){
 myfunction(par_initia,Optfig=1)
 resTC310=hjkb(par=par_initia,myfunction,Optfig=0,
               lower=par_min,upper=par_max,control=list(maxfeval=100000))
+
+
+#--- Best set of parameters
+par.optmized.SC10 = resoptimr
+
+#--- Final Results with best-fit
+final.res.SC10 = myfunction(par.optmized.SC10,Optfig=1)
 
 
 
