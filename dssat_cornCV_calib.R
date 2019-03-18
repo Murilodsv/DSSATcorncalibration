@@ -9,7 +9,7 @@ pkg = c("sirad", # For GIS image usage
 ipkg = pkg %in% rownames(installed.packages())
 sapply(pkg[!ipkg],function(x) install.packages(x))
 
-
+#--- Load function
 library(sirad)
 library(Dasst)
 library(hydroGOF)
@@ -124,9 +124,6 @@ Obs_data = read.csv(paste(wd,"/OBS_Calib-Data_.csv",sep=""))
 #--- Read optimization parameters values and ranges
 par <- read.csv(paste(wd,"/Corn_calibration.csv",sep=""))
 
-#--- plot envelope
-par(mfrow=c(4,2),mar=c(4,4,3,2)+0.1,mgp=c(2.5,0.7,0))
-
 #-------------------------SC10 cultivar------------------------------
 
 #--- Observed data for SC10 cultivar
@@ -148,9 +145,9 @@ resSC10 =hjkb(par=par_initia,myfunction,Optfig=0,
 res=modFit(f=myfunction,p=par_initia,Optfig=1,
            lower=par_min,upper=par_max,method="Pseudo", control=list(numiter=50000))
 
-resoptimr=optimx::optimx(par=par_initia,myfunction,Optfig=0,itnmax=100000,
+resoptimr=optimx::optimx(par=par_initia,myfunction,Optfig=1,itnmax=100000,
                          lower=par_min,upper=par_max,method=c("Nelder-Mead","hjkb","L-BFGS-B"), 
-                         control=list(maxit=100000,all.methods=T,follow.on=T))
+                         control=list(maxit=100000,all.methods=F,follow.on=T))
 
 #--- Best set of parameters from optimx()
 par.optmized.SC10 = resoptimr
@@ -173,9 +170,9 @@ par_max <- par$Calib_range_max
 ini.res = myfunction(par_initia,Optfig=1)
 
 #--- Optimization
-resoptimr=optimx::optimx(par=par_initia,myfunction,Optfig=0,itnmax=100000,
+resoptimr=optimx::optimx(par=par_initia,myfunction,Optfig=1,itnmax=100000,
                          lower=par_min,upper=par_max,method=c("Nelder-Mead","hjkb","L-BFGS-B"), 
-                         control=list(maxit=100000,all.methods=T,follow.on=T))
+                         control=list(maxit=100000,all.methods=F,follow.on=T))
 
 #--- Best set of parameters
 par.optmized.TC310 = resoptimr
