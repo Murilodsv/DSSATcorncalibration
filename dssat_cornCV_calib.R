@@ -18,7 +18,7 @@ library(dfoptim)
 library(FME)
 library(optimx)
 
-wd = "D:/ISmalia_DSSAT"
+wd = "D:/Murilo/dssat_corn/DSSATcorncalibration"#"D:/ISmalia_DSSAT"
 
 Obs_data = read.csv(paste(wd,"/OBS_Calib-Data_.csv",sep=""))
 
