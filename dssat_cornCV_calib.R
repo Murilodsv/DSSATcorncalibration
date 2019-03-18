@@ -49,7 +49,7 @@ myfunction <- function(X,Optfig){
   CalibP[5] <- paste(" ",CalibP[5],sep="")
   
   cat(out_string,
-      "990001 LONG SEASON          . IB0001",CalibP,file="C:/DSSAT47/Genotype/MZCER047.CUL",fill=T,append = F)
+      "990001 LONG SEASON          . IB0001",CalibP,file="C:/DSSAT47/Maize/MZCER047.CUL",fill=T,append = F)
   
   out_string2 <- paste0("*MAIZE ECOTYPE COEFFICIENTS: MZCER047 MODEL\n",
                         "@ECO#  ECONAME.........  TBASE  TOPT ROPT   P20  DJTI  GDDE  DSGFT  RUE   KCAN  TSEN  CDAY")
@@ -69,7 +69,7 @@ myfunction <- function(X,Optfig){
   CalibP2[9] <- paste("  ",CalibP2[9],sep="")
   
   cat(out_string2,
-      "IB0001 GENERIC MIDWEST1   ",CalibP2,file="C:/DSSAT47/Genotype/MZCER047.ECO",fill=T,append = F)
+      "IB0001 GENERIC MIDWEST1   ",CalibP2,file="C:/DSSAT47/Maize/MZCER047.ECO",fill=T,append = F)
 
 
   setwd(paste("C:/DSSAT47/Maize",sep = ""))
