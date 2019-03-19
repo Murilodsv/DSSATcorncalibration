@@ -1,11 +1,12 @@
 #--- Installing missing packages
-pkg = c("sirad", # For GIS image usage
-        "Dasst",  # For GIS image usage
-        "hydroGOF",  # For NetCDF files manipulations
-        "optimr", # Track runtime 
-        "dfoptim",# Plot cool charts 
-        "FME",  # Make a beep when finished a process
-        "optimx")  
+pkg = c("sirad", 
+        "Dasst",  
+        "hydroGOF",  
+        "optimr", 
+        "dfoptim",
+        "FME",  
+        "optimx",
+        "tictoc")  
 ipkg = pkg %in% rownames(installed.packages())
 sapply(pkg[!ipkg],function(x) install.packages(x))
 
@@ -17,6 +18,7 @@ library(optimr)
 library(dfoptim)
 library(FME)
 library(optimx)
+library(tictoc)
 
 #--- Set working directory
 wd = "D:/Murilo/dssat_corn/DSSATcorncalibration"#"D:/ISmalia_DSSAT"
@@ -140,17 +142,22 @@ ini.res = myfunction(par_initia,Optfig=1)
 
 #--- Optimization
 resSC10 =hjkb(par=par_initia,myfunction,Optfig=0,
-         lower=par_min,upper=par_max,control=list(maxfeval=100000))
+              lower=par_min,upper=par_max,control=list(maxfeval=100000))
 
 res=modFit(f=myfunction,p=par_initia,Optfig=1,
            lower=par_min,upper=par_max,method="Pseudo", control=list(numiter=50000))
 
+tic("Calibration SC10")
 resoptimr=optimx::optimx(par=par_initia,myfunction,Optfig=1,itnmax=100000,
                          lower=par_min,upper=par_max,method=c("Nelder-Mead","hjkb","L-BFGS-B"), 
                          control=list(maxit=100000,all.methods=F,follow.on=T))
+toc()
 
-#--- Best set of parameters from optimx()
-par.optmized.SC10 = resoptimr
+#--- Best set of parameters from optimx() Ordered by lower rmse
+resoptimr         = resoptimr[order(resoptimr$value),]
+
+#--- calibrated Parameters for SC10
+par.optmized.SC10 = t(resoptimr)[1:length(par_initia),1]
 
 #--- Final Results with best-fit
 final.res.SC10 = myfunction(par.optmized.SC10,Optfig=1)
@@ -170,16 +177,17 @@ par_max <- par$Calib_range_max
 ini.res = myfunction(par_initia,Optfig=1)
 
 #--- Optimization
+tic("Calibration TC310")
 resoptimr=optimx::optimx(par=par_initia,myfunction,Optfig=1,itnmax=100000,
                          lower=par_min,upper=par_max,method=c("Nelder-Mead","hjkb","L-BFGS-B"), 
                          control=list(maxit=100000,all.methods=F,follow.on=T))
+toc()
 
-#--- Best set of parameters
-par.optmized.TC310 = resoptimr
+#--- Best set of parameters from optimx() Ordered by lower rmse
+resoptimr         = resoptimr[order(resoptimr$value),]
+
+#--- calibrated Parameters for TC310
+par.optmized.TC310 = t(resoptimr)[1:length(par_initia),1]
 
 #--- Final Results with best-fit
-final.res.TC310 = myfunction(par.optmized.TC310,Optfig=1)
-
-
-
-
+final.res.TC310 = myfunction(par.optmized.SC10,Optfig=1)
